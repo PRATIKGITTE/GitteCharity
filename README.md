@@ -19,5 +19,5 @@ Feel free to **fork the repository and submit pull requests** with your suggesti
 ## License
 This project is licensed under the **MIT License**. See the LICENSE file for details.
 
-For more information, visit our live website at **[Nurtura.org](https://nurtura.org)**.
+For more information, visit our live website at **[Nurtura.org]([https://nurtura.org](https://pratikgitte.github.io/nurtura/))**.
 
