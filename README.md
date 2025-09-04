@@ -1,4 +1,4 @@
-# Nurtura
+# GitteCharity (Nurtura)
 
 **Empowering Lives, Nurturing Communities**
 
