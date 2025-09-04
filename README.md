@@ -28,10 +28,9 @@ Every bit of support helps us create a better experience for those we serve.
 ---
 
 ## 🔗 Live Website
-Visit us here: [GitteCharity Website](https://pratikgitte.github.io/GitteCharity/)
+Visit us here: [GitteCharity.org](https://pratikgitte.github.io/GitteCharity/)
 
 ---
 
 ## 📖 About
-**Nurtura** is the heart of GitteCharity – a charitable initiative dedicated to **empowering lives and nurturing communities**.  
-Our mission is to provide essential support in areas such as **education, food, shelter, and animal welfare** to individuals and families who are facing challenges.
+**Nurtura** is the heart of GitteCharity – a charitable initiative dedicated to **empowering lives and nurturing communities**. Our mission is to provide essential support in areas such as **education, food, shelter, and animal welfare** to individuals and families who are facing challenges.
