@@ -16,5 +16,5 @@ We invite you to join our cause by **donating, volunteering, or spreading the wo
 ## How to Contribute
 Feel free to **fork the repository and submit pull requests** with your suggestions or improvements. Every bit of support helps us create a better experience for those we serve.
 
-For more information, visit our live website at **[Nurtura.org](https://pratikgitte.github.io/nurtura/)**.
+For more information, visit our live website at **[GitteCharity.org](https://pratikgitte.github.io/GitteCharity/)**.
 
