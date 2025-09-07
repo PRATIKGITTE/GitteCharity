@@ -1,207 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GitteCharity (Nurtura) — Empowering Lives, Nurturing Communities</title>
-  <meta name="description" content="GitteCharity (Nurtura) is a volunteer-driven initiative helping with education, food, shelter, and animal welfare. Donate, volunteer, give or claim free items." />
-  <meta name="theme-color" content="#274c4a" />
-  <meta property="og:title" content="GitteCharity (Nurtura)" />
-  <meta property="og:description" content="Empowering Lives, Nurturing Communities — donate, give, claim free items, and support animals." />
+  <meta name="description" content="GitteCharity (Nurtura) is a volunteer‑driven initiative helping with education, food, shelter, and animal welfare. Donate, volunteer, give or claim free items." />
+  <meta name="theme-color" content="#4f46e5" />
   <style>
     :root{
-      --bg:#071022;
-      --panel:#0b1022;
-      --muted:#94a3b8;
-      --text:#e5e7eb;
-      --brand:#2c7a7b;       /* teal brand */
-      --accent:#68d391;      /* soft green */
-      --card: rgba(11,16,34,0.9);
-      --shadow: 0 10px 28px rgba(2,6,23,0.6);
-      --radius:14px;
-      --gap:14px;
+      --bg:#0f172a;          /* slate-900 */
+      --panel:#111827;       /* gray-900 */
+      --panel-2:#0b1022;     /* deeper */
+      --muted:#94a3b8;       /* slate-400 */
+      --text:#e5e7eb;        /* gray-200 */
+      --brand:#4f46e5;       /* indigo-600 */
+      --brand-2:#22c55e;     /* green-500 */
+      --accent:#f59e0b;      /* amber-500 */
+      --danger:#ef4444;      /* red-500 */
+      --ok:#10b981;          /* emerald-500 */
+      --card:#0b1022cc;      /* translucent */
+      --shadow: 0 10px 30px rgb(0 0 0 / 25%);
+      --radius: 18px;
     }
-    /* Reset & base */
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#020617);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
-    a{color:var(--accent);text-decoration:none}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Noto Sans,sans-serif}
+    a{color:#c7d2fe;text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%;display:block}
-    button{cursor:pointer;border:0}
-    .container{max-width:1100px;margin:0 auto;padding:18px}
+    button{cursor:pointer}
+    .container{max-width:1100px;margin-inline:auto;padding:28px}
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.grid-3{grid-template-columns:1fr}}
 
     /* NAV */
-    header.site-nav{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(6,10,20,0.7), rgba(6,10,20,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .brand svg{width:44px;height:44px}
-    .brand .title{font-weight:700;font-size:1.05rem}
-    .brand .tag{font-size:0.85rem;color:var(--muted)}
-    nav.main-links{display:flex;gap:10px;align-items:center}
-    nav.main-links a{color:var(--text);padding:8px 10px;border-radius:10px;font-size:0.95rem}
-    .nav-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:linear-gradient(180deg,var(--brand),#23635f);color:white;padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);font-weight:600}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:8px;color:var(--text)}
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, #0b1022f2, #0b102200);backdrop-filter: blur(8px);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 22px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-badge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#8b5cf6);box-shadow:var(--shadow)}
+    .logo-badge svg{width:26px;height:26px}
+    .nav a{margin:0 10px;color:#e5e7eb}
+    .btn{border:0;border-radius:999px;padding:10px 16px;background:var(--brand);color:white;box-shadow:var(--shadow)}
+    .btn.secondary{background:#1f2937}
+    .btn.ghost{background:transparent;border:1px solid #334155}
 
     /* HERO */
-    .hero{position:relative;min-height:56vh;display:grid;place-items:center;overflow:hidden;padding:28px 0}
-    .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35);pointer-events:none}
-    .hero .overlay{position:relative;text-align:center;padding:16px;max-width:980px}
-    .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);color:var(--muted);border-radius:999px;padding:6px 10px;font-weight:600}
-    .hero h1{font-size:clamp(22px,4vw,44px);margin:14px 0 8px}
-    .hero p.lead{color:var(--muted);margin-bottom:12px}
+    .hero{position:relative;min-height:70vh;display:grid;place-items:center;overflow:hidden}
+    .hero video,.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.35)}
+    .hero .overlay{position:relative;text-align:center;padding:40px}
+    .hero h1{font-size:clamp(28px,4vw,48px);line-height:1.1;margin:0 0 14px}
+    .pill{display:inline-flex;align-items:center;gap:8px;background:#1f2937;border:1px solid #334155;color:#cbd5e1;border-radius:999px;padding:6px 12px;font-size:14px}
 
-    /* SECTIONS */
-    section{padding:28px 0;border-top:1px solid rgba(255,255,255,0.02)}
-    h2{font-size:clamp(18px,2.6vw,26px);margin:0 0 8px;color:var(--accent)}
+    /* SECTION */
+    section{padding:30px 0;border-top:1px solid #0b122a}
+    h2{font-size:clamp(22px,2.4vw,28px);margin:0 0 8px}
     .muted{color:var(--muted)}
-    .card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
+    .card{background:var(--card);border:1px solid #1e293b;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
 
-    /* GRID helpers */
-    .grid{display:grid;gap:var(--gap)}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .grid.resp{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-
-    /* MARKETPLACE / ITEM CARD */
+    /* MARKET */
     .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-    .input,.select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:10px 12px;border-radius:10px;outline:none}
-    .input::placeholder{color:rgba(229,231,235,0.5)}
-    .card.item{display:flex;gap:12px;align-items:flex-start}
-    .item img{width:120px;height:100px;border-radius:10px;object-fit:cover;border:1px solid rgba(255,255,255,0.04)}
+    .input,.select,textarea{background:#0b1022;border:1px solid #233047;color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
+    .input:focus,.select:focus,textarea:focus{border-color:#3b82f6}
+    .item{display:flex;gap:12px}
+    .item img{width:120px;height:100px;border-radius:12px;object-fit:cover;border:1px solid #1f2937}
     .item .meta{flex:1}
-    .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px;color:var(--muted)}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2937;border:1px solid #334155;font-size:12px;color:#cbd5e1}
+    .price{color:#a7f3d0}
 
-    /* CART panel (desktop: right drawer; mobile: bottom sheet) */
-    .cart-toggle{position:fixed;right:18px;bottom:18px;z-index:70}
-    .cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,92vw);background:linear-gradient(180deg,rgba(6,10,20,0.95),rgba(6,10,20,0.98));box-shadow:var(--shadow);transform:translateX(102%);transition:transform .28s;z-index:80;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,0.03)}
+    /* CART */
+    .cart-toggle{position:fixed;right:20px;bottom:20px;z-index:60}
+    .cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,90vw);background:#0a0f22;border-left:1px solid #1f2937;box-shadow:var(--shadow);transform:translateX(102%);transition:.3s;z-index:70;display:flex;flex-direction:column}
     .cart-panel.open{transform:translateX(0)}
-    .cart-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03)}
-    .cart-body{flex:1;overflow:auto;padding:12px}
-    .cart-item{display:flex;gap:12px;border-bottom:1px solid rgba(255,255,255,0.03);padding:10px 0}
-    .cart-item img{width:64px;height:64px;border-radius:8px;object-fit:cover}
+    .cart-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #1f2937}
+    .cart-body{flex:1;overflow:auto;padding:14px}
+    .cart-item{display:flex;gap:12px;border-bottom:1px solid #1f2937;padding:10px 0}
+    .cart-item img{width:64px;height:64px;border-radius:10px;object-fit:cover}
 
-    /* DONATION Widget (floating) */
-    .donate-widget{position:fixed;right:18px;bottom:86px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));padding:12px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:75;border:1px solid rgba(255,255,255,0.03)}
+    /* DONATION QR WIDGET */
+    .donate-widget{position:fixed;right:20px;bottom:90px;background:#0a0f22;border:1px solid #1f2937;border-radius:16px;box-shadow:var(--shadow);padding:14px;width:300px;display:none;z-index:65}
     .donate-widget.open{display:block}
+    .note{font-size:12px;color:#94a3b8}
 
-    /* Owner dialog (modal) */
-    dialog.owner{border:none;border-radius:12px;padding:0;background:transparent}
-    .owner-modal{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:980px}
+    /* OWNER PANEL */
+    .owner-btn{position:fixed;left:20px;bottom:20px;z-index:60}
+    dialog{border:none;border-radius:16px;background:#0a0f22;color:var(--text);padding:0;box-shadow:var(--shadow)}
+    dialog .dialog-inner{padding:18px;min-width:min(520px,92vw)}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{border-bottom:1px solid #1f2937;padding:8px 6px;text-align:left}
 
     /* FOOTER */
-    footer{padding:18px 0;text-align:center;color:var(--muted)}
-
-    /* Responsive adjustments */
-    @media (max-width:900px){
-      .nav-inner{padding:8px 12px}
-      .grid.cols-3{grid-template-columns:1fr 1fr}
-      .hero{min-height:48vh}
-      .nav-actions{gap:8px}
-    }
-    @media (max-width:680px){
-      nav.main-links{display:none}
-      .menu-toggle{display:inline-block}
-      .hero h1{font-size:22px}
-      .hero .overlay{padding:12px}
-      .cart-panel{left:0;right:0;bottom:0;top:auto;height:56vh;width:100%;transform:translateY(102%);border-left:none;border-radius:12px 12px 0 0}
-      .cart-panel.open{transform:translateY(0)}
-      .cart-header{border-bottom:1px solid rgba(255,255,255,0.03)}
-      .item img{width:100%;height:160px;border-radius:10px}
-      .card.item{flex-direction:column}
-      .container{padding:12px}
-    }
-
-    /* small helpers */
-    .muted-sm{color:var(--muted);font-size:13px}
-    .pill{font-size:13px;display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03)}
-    .small{font-size:13px}
+    footer{padding:30px 0;color:#a5b4fc;text-align:center;border-top:1px solid #0b122a}
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <header class="site-nav" role="banner">
-    <div class="nav-inner container">
-      <div class="brand" aria-hidden="false">
-        <!-- Inline SVG logo -->
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="32" cy="32" r="30" fill="#2c7a7b"/>
-          <path d="M32 18c-5 5-8 10-8 14 0 4 3 7 8 7s8-3 8-7c0-4-3-9-8-14z" fill="#68d391"/>
-          <path d="M24 40c-3 2-5 4-5 7 0 5 6 9 13 9s13-4 13-9c0-3-2-5-5-7" fill="#edf2f7"/>
-        </svg>
-        <div>
-          <div class="title">GitteCharity</div>
-          <div class="tag">Nurtura · Empowering Lives</div>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-badge" aria-label="GitteCharity logo" title="GitteCharity">
+          <!-- Heart + Paw inline SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12.1 21s-6.6-4.6-8.6-8.1C1.8 9.6 3 6.2 6 5.3c1.6-.5 3.4.1 4.5 1.4 1-1.3 2.8-1.9 4.5-1.4 3 1 4.3 4.3 2.5 7.6-2 3.5-8.6 8.1-8.6 8.1Z" fill="white"/>
+            <circle cx="18.5" cy="6.5" r="2.2" fill="#0ea5e9"/>
+          </svg>
         </div>
+        <strong>GitteCharity</strong>&nbsp;<span class="muted">(Nurtura)</span>
       </div>
-
-      <nav class="main-links" aria-label="Main navigation">
+      <div>
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#market">Free Items</a>
         <a href="#get-involved">Get Involved</a>
         <a href="#animals">Animal Help</a>
         <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="nav-actions">
-        <button class="menu-toggle" aria-label="Open menu" onclick="toggleMobileMenu()">☰</button>
-        <button class="btn" onclick="openDonate()" aria-label="Donate">Donate</button>
-        <button class="btn secondary" onclick="toggleCart()" aria-label="Open cart">Cart 🧺 <span id="cartCount" style="margin-left:8px;background:var(--accent);color:#04241f;padding:2px 8px;border-radius:12px;font-size:13px">0</span></button>
+        <button class="btn" onclick="openDonate()">Donate</button>
       </div>
     </div>
+  </nav>
 
-    <!-- mobile menu (hidden by default) -->
-    <div id="mobileMenu" style="display:none;background:linear-gradient(180deg, rgba(6,10,20,0.98), rgba(6,10,20,0.96));padding:10px 18px;border-top:1px solid rgba(255,255,255,0.02)">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <a href="#home" onclick="closeMobileMenu()">Home</a>
-        <a href="#about" onclick="closeMobileMenu()">About</a>
-        <a href="#market" onclick="closeMobileMenu()">Free Items</a>
-        <a href="#get-involved" onclick="closeMobileMenu()">Get Involved</a>
-        <a href="#animals" onclick="closeMobileMenu()">Animal Help</a>
-        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <!-- Optional background video: replace src with your own bg.mp4 in repo -->
+    <video autoplay muted loop playsinline poster="" onerror="this.style.display='none'">
+      <!-- You can replace the below with your own hosted video or remove the <video> entirely -->
+      <source src="https://videos.pexels.com/video-files/855293/855293-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+    </video>
+    <div class="bg" style="background:radial-gradient(60% 60% at 50% 50%, #0b1022 0%, #020617 100%);"></div>
+    <div class="overlay container">
+      <span class="pill">Global Initiatives • Reaching lives across India</span>
+      <h1>Empowering Lives, Nurturing Communities</h1>
+      <p class="muted">Give or claim essentials for free — books, clothes, shoes, school supplies, and more. Delivery charges may apply.</p>
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="btn" href="#market">Explore Free Items</a>
+        <a class="btn secondary" href="#give">Give an Item</a>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <main id="home" class="hero" role="main">
-    <video autoplay muted loop playsinline poster="" onerror="this.style.display='none'">
-      <source src="https://videos.pexels.com/video-files/855293/855293-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-    </video>
-    <div class="overlay container">
-      <div style="display:flex;gap:10px;justify-content:center"><span class="pill">Global Initiatives • Reaching lives across India</span></div>
-      <h1>Empowering Lives, Nurturing Communities</h1>
-      <p class="lead muted">Give or claim essentials for free — books, clothes, shoes, school supplies, and more. Delivery charges may apply.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <a class="btn" href="#market">Explore Free Items</a>
-        <a class="btn secondary" href="#give">List an Item</a>
-      </div>
-    </div>
-  </main>
-
   <!-- ABOUT -->
   <section id="about">
-    <div class="container grid" style="grid-template-columns:1.2fr .8fr;gap:18px">
+    <div class="container grid" style="grid-template-columns:1.2fr .8fr;gap:22px">
       <div class="card">
         <h2>About GitteCharity (Nurtura)</h2>
-        <p>GitteCharity is a charitable initiative dedicated to <strong>education</strong>, <strong>food</strong>, <strong>shelter</strong>, and <strong>animal welfare</strong>. We connect donors with people who need essentials — ensuring dignity through a simple, transparent and community-driven platform.</p>
+        <p>GitteCharity is a charitable initiative dedicated to <strong>education</strong>, <strong>food</strong>, <strong>shelter</strong>, and <strong>animal welfare</strong>. We connect donors with people who need essentials — ensuring dignity through a simple, transparent and community‑driven platform.</p>
         <p class="muted">We are building a safe marketplace where anyone can <em>give</em> an item or <em>claim</em> an item for free. Owners may ask claimants to pay delivery charges only. Cash donations help us expand reach.</p>
+        <div class="grid grid-3" style="margin-top:8px">
+          <div class="card"><div class="badge">200k+ Impact</div><div class="muted">Target lives supported through our network over time.</div></div>
+          <div class="card"><div class="badge">25+ Regions</div><div class="muted">Expanding city by city with local partners.</div></div>
+          <div class="card"><div class="badge">100% Free Items</div><div class="muted">Only delivery charges, if needed.</div></div>
+        </div>
       </div>
-
-      <aside class="card">
+      <div class="card">
         <h2>Quick Actions</h2>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <button class="btn" onclick="openDonate()">Donate via UPI</button>
+        <div class="grid">
+          <button class="btn" onclick="openDonate()">Donate via UPI QR</button>
           <a class="btn secondary" href="#give">List an Item to Give</a>
-          <a class="btn ghost" href="#contact">Request Help / Message</a>
+          <a class="btn secondary" href="#contact">Request Help / Message</a>
           <button class="btn ghost" onclick="openOwner()">Owner / Admin</button>
         </div>
-        <p class="muted small" style="margin-top:10px">Tip: this is an open single-file MVP. For multi-user publishing later, connect a backend (Firebase / Supabase).</p>
-      </aside>
+        <p class="note" style="margin-top:10px">Tip: Star &amp; fork this repo to contribute features. Single‑file build for GitHub Pages.</p>
+      </div>
     </div>
   </section>
 
@@ -211,73 +170,90 @@
       <h2>Free Items Marketplace</h2>
       <p class="muted">Claim items for free (pay only delivery if needed). Use filters to find what you need.</p>
 
-      <div class="toolbar" style="margin-top:10px">
-        <input id="search" class="input" placeholder="Search items (e.g., books, shoes, laptop)" />
-        <select id="category" class="select"><option value="">All categories</option><option>Books</option><option>Clothes</option><option>Shoes</option><option>Electronics</option><option>School Supplies</option><option>Furniture</option><option>Kitchen</option><option>Other</option></select>
-        <select id="city" class="select"><option value="">All cities</option><option>Bengaluru</option><option>Mumbai</option><option>Pune</option><option>Hyderabad</option><option>Delhi</option><option>Chennai</option><option>Other</option></select>
+      <div class="toolbar">
+        <input id="search" class="input" placeholder="Search items (e.g., books, shoes, laptop bag)" />
+        <select id="category" class="select">
+          <option value="">All categories</option>
+          <option>Books</option>
+          <option>Clothes</option>
+          <option>Shoes</option>
+          <option>Electronics</option>
+          <option>School Supplies</option>
+          <option>Furniture</option>
+          <option>Kitchen</option>
+          <option>Other</option>
+        </select>
+        <select id="city" class="select">
+          <option value="">All cities</option>
+          <option>Bengaluru</option>
+          <option>Mumbai</option>
+          <option>Pune</option>
+          <option>Hyderabad</option>
+          <option>Delhi</option>
+          <option>Chennai</option>
+          <option>Other</option>
+        </select>
         <button class="btn" onclick="applyFilters()">Filter</button>
         <button class="btn ghost" onclick="resetFilters()">Reset</button>
       </div>
 
-      <div id="items" class="grid resp" style="margin-top:14px"></div>
+      <div id="items" class="grid"></div>
 
-      <!-- GIVE / POST FORM -->
       <div id="give" class="card" style="margin-top:18px">
-        <h3>Give an Item</h3>
-        <p class="muted">List something in good condition to help someone. Uploaded images are saved locally (to persist across reloads).</p>
-        <form id="giveForm" onsubmit="addItem(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
-          <input class="input" name="title" required placeholder="Item title (e.g., Class 10 Science Book)" />
-          <select class="select" name="category"><option>Books</option><option>Clothes</option><option>Shoes</option><option>Electronics</option><option>School Supplies</option><option>Furniture</option><option>Kitchen</option><option>Other</option></select>
-          <input class="input" name="city" required placeholder="City (e.g., Bengaluru)" />
+        <h3 style="margin:0 0 8px">Give an Item</h3>
+        <p class="muted" style="margin-top:-6px">List something in good condition to help someone. You can chat with claimant after they request.</p>
+        <form id="giveForm" class="grid" style="grid-template-columns:1fr 1fr;gap:12px" onsubmit="addItem(event)">
+          <input class="input" required name="title" placeholder="Item title (e.g., Class 10 Science Book)" />
+          <select class="select" required name="category">
+            <option>Books</option><option>Clothes</option><option>Shoes</option><option>Electronics</option><option>School Supplies</option><option>Furniture</option><option>Kitchen</option><option>Other</option>
+          </select>
+          <input class="input" required name="city" placeholder="City (e.g., Bengaluru)" />
           <input class="input" name="contact" placeholder="Contact (phone/email optional)" />
-          <textarea class="input" name="desc" style="grid-column:1/-1" placeholder="Description, condition, pickup/delivery notes"></textarea>
-
-          <!-- file input stored persistently as dataURL -->
-          <label class="muted-sm" style="grid-column:1/-1">Photo (JPG/PNG — stored locally in browser):</label>
+          <textarea class="input" style="grid-column:1/-1" name="desc" placeholder="Description, condition, pickup/delivery notes"></textarea>
+          <label class="note" style="grid-column:1/-1">Photo (JPG/PNG, will be stored locally in your browser only):</label>
           <input class="input" style="grid-column:1/-1" type="file" accept="image/*" name="photo" />
           <div style="grid-column:1/-1;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-            <label style="font-size:13px"><input type="checkbox" name="delivery" /> Delivery available (charges may apply)</label>
-            <label style="font-size:13px"><input type="checkbox" name="animal" /> Animal-related item</label>
+            <label><input type="checkbox" name="delivery" /> Delivery available (charges may apply)</label>
+            <label><input type="checkbox" name="animal" /> Animal‑related item</label>
           </div>
           <button class="btn" style="grid-column:1/-1">Post Item</button>
         </form>
-        <p class="muted small">Privacy: Images and data are stored in your browser's localStorage. For global listings, we'll connect to a backend later.</p>
+        <p class="note">Privacy: Uploaded images and items are saved in <strong>your</strong> browser (LocalStorage) on this device. To publish globally, push this file to a server with a database later.</p>
       </div>
     </div>
   </section>
 
   <!-- ANIMAL HELP -->
   <section id="animals">
-    <div class="container grid cols-2">
+    <div class="container grid" style="grid-template-columns:1fr 1fr">
       <div class="card">
         <h2>Animal Help</h2>
-        <p class="muted">Report an animal in need or list supplies for shelters. We'll connect volunteers nearby.</p>
-        <form id="animalForm" onsubmit="submitAnimal(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
-          <input class="input" name="title" required placeholder="e.g., Dog food, Rescue request" />
-          <input class="input" name="city" required placeholder="City" />
-          <textarea class="input" name="desc" style="grid-column:1/-1" placeholder="Details, location, time"></textarea>
-          <input class="input" name="contact" style="grid-column:1/-1" placeholder="Your contact (optional)" />
+        <p class="muted">Report an animal in need or list supplies for shelters. We connect nearby volunteers.</p>
+        <form id="animalForm" onsubmit="submitAnimal(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+          <input class="input" required name="title" placeholder="e.g., Dog food, Cat litter, Rescue request" />
+          <input class="input" required name="city" placeholder="City" />
+          <textarea class="input" style="grid-column:1/-1" name="desc" placeholder="Details, location, time"></textarea>
+          <input class="input" style="grid-column:1/-1" name="contact" placeholder="Your contact (optional)" />
           <button class="btn" style="grid-column:1/-1">Submit Animal Help</button>
         </form>
       </div>
-
       <div class="card">
-        <h3>Recent Animal Posts</h3>
-        <div id="animalList" class="grid" style="margin-top:8px"></div>
+        <h3 style="margin:0 0 8px">Recent Animal Posts</h3>
+        <div id="animalList" class="grid"></div>
       </div>
     </div>
   </section>
 
   <!-- GET INVOLVED -->
   <section id="get-involved">
-    <div class="container grid cols-2">
+    <div class="container grid" style="grid-template-columns:1fr 1fr;gap:22px">
       <div class="card">
         <h2>Volunteer / Intern</h2>
-        <p class="muted">Contribute time or skills—logistics, outreach, engineering, animal rescue. Remote and on-ground roles.</p>
-        <form id="volForm" onsubmit="submitMessage(event,'volunteers')" class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
-          <input class="input" name="name" required placeholder="Full Name" />
-          <input class="input" name="phone" required placeholder="Phone" />
-          <input class="input" name="email" style="grid-column:1/-1" placeholder="Email (optional)" />
+        <p class="muted">Contribute time or skills—logistics, design, outreach, engineering. Remote and on‑ground roles.</p>
+        <form id="volForm" onsubmit="submitMessage(event, 'volunteers')" class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+          <input class="input" required name="name" placeholder="Full Name" />
+          <input class="input" required name="phone" placeholder="Phone" />
+          <input class="input" style="grid-column:1/-1" name="email" placeholder="Email (optional)" />
           <select class="select" name="role" style="grid-column:1/-1">
             <option>General Volunteer</option>
             <option>Delivery / Pickup</option>
@@ -287,18 +263,17 @@
             <option>Backend Developer</option>
             <option>Designer</option>
           </select>
-          <textarea class="input" name="msg" style="grid-column:1/-1" placeholder="Tell us how you'd like to help"></textarea>
+          <textarea class="input" style="grid-column:1/-1" name="msg" placeholder="Tell us how you'd like to help"></textarea>
           <button class="btn" style="grid-column:1/-1">Submit</button>
         </form>
       </div>
-
       <div class="card">
         <h2>Contact / Request Help</h2>
         <p class="muted">Ask for books, school supplies, household essentials, or general help. We'll reach out.</p>
-        <form id="contactForm" onsubmit="submitMessage(event,'messages')" class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
-          <input class="input" name="name" required placeholder="Your Name" />
-          <input class="input" name="phone" required placeholder="Phone" />
-          <textarea class="input" name="msg" style="grid-column:1/-1" placeholder="What do you need? (be specific)"></textarea>
+        <form id="contactForm" onsubmit="submitMessage(event, 'messages')" class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+          <input class="input" required name="name" placeholder="Your Name" />
+          <input class="input" required name="phone" placeholder="Phone" />
+          <textarea class="input" style="grid-column:1/-1" name="msg" placeholder="What do you need? (be specific)"></textarea>
           <button class="btn" style="grid-column:1/-1">Send Message</button>
         </form>
       </div>
@@ -307,11 +282,11 @@
 
   <!-- CONTACT & INFO -->
   <section id="contact">
-    <div class="container grid" style="grid-template-columns:1fr 1fr 1fr;gap:18px">
+    <div class="container grid" style="grid-template-columns:1fr 1fr 1fr;gap:22px">
       <div class="card">
         <h2>Global Initiatives</h2>
         <p class="muted">We aim to reach individuals across India and beyond through partnerships with schools, shelters and NGOs.</p>
-        <ul class="muted-sm">
+        <ul>
           <li>Learning kits for students</li>
           <li>Community food drives</li>
           <li>Emergency support for families</li>
@@ -321,13 +296,12 @@
       <div class="card">
         <h2>Official Contact</h2>
         <p>Phone / UPI: <strong>9860191711</strong></p>
-        <p>Email: <a href="mailto:pratikgitte20@gmail.com">pratikgitte20@gmail.com</a></p>
-        <p class="muted-sm note">Use the contact form for requests so we can track and respond.</p>
+        <p>Email: <a href="mailto:contact@gittecharity.org">contact@gittecharity.org</a> (placeholder)</p>
+        <p class="note">Add your real email in this file when ready.</p>
       </div>
       <div class="card">
         <h2>Transparency</h2>
-        <p class="muted">Open, community-driven and privacy-respecting. This MVP stores data locally in your browser only. For global access, connect a backend later.</p>
-        <p class="muted-sm">Admin actions available via Owner / Admin panel (Import / Export / Clear local data).</p>
+        <p class="muted">Open, community‑driven and privacy‑respecting. This MVP stores data locally in your browser only. To accept public listings across users, connect a simple backend later (Firebase/Supabase).</p>
       </div>
     </div>
   </section>
@@ -335,80 +309,78 @@
   <!-- DONATION WIDGET (floating) -->
   <div id="donateWidget" class="donate-widget" role="dialog" aria-modal="true">
     <h3 style="margin:0 0 8px">Donate via UPI</h3>
-    <p class="muted-sm">Choose provider and generate UPI QR (amount optional).</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-      <select id="upiProvider" class="select" aria-label="UPI provider">
+    <p class="note">Choose your UPI provider and generate a QR. Amount is optional.</p>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <select id="upiProvider" class="select">
         <option value="@ybl">PhonePe (@ybl)</option>
-        <option value="@axl">GPay (@axl)</option>
+        <option value="@axl">Google Pay (@axl)</option>
+        <option value="@oksbi">Google Pay (@oksbi)</option>
+        <option value="@okhdfcbank">GPay/HDFC (@okhdfcbank)</option>
+        <option value="@okaxis">GPay/Axis (@okaxis)</option>
         <option value="@paytm">Paytm (@paytm)</option>
-        <option value="@oksbi">SBI (@oksbi)</option>
-        <option value="@okhdfcbank">HDFC (@okhdfcbank)</option>
       </select>
-      <input id="upiAmount" class="input" type="number" min="1" placeholder="Amount (₹)" aria-label="Amount" />
-      <input id="upiNote" class="input" style="grid-column:1/-1" placeholder="Note (optional)" aria-label="Note" />
+      <input id="upiAmount" class="input" type="number" min="1" step="1" placeholder="Amount (₹)" />
+      <input id="upiNote" class="input" style="grid-column:1/-1" placeholder="Note (optional)" />
     </div>
-    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <button class="btn" onclick="makeUpiQR()">Generate QR</button>
       <button class="btn secondary" onclick="openDonate(false)">Close</button>
     </div>
     <div id="qrWrap" style="margin-top:12px;text-align:center"></div>
-    <p class="muted-sm" style="margin-top:8px">If QR doesn't open in your app, send to UPI number <strong>9860191711</strong> manually.</p>
+    <p class="note" style="margin-top:8px">If QR doesn't open in your app, send to UPI number <strong>9860191711</strong> manually.</p>
   </div>
-
-  <!-- Floating controls -->
-  <button class="btn cart-toggle" style="position:fixed;right:18px;bottom:18px;z-index:65" onclick="toggleCart()">🧺 Cart <span id="cartCountFloat" style="background:var(--accent);color:#04241f;padding:2px 8px;border-radius:12px;margin-left:8px">0</span></button>
-  <button class="btn" style="position:fixed;left:18px;bottom:18px;z-index:65" onclick="openOwner()">🔐 Owner</button>
+  <button class="btn cart-toggle" onclick="toggleCart()">🧺 Cart <span id="cartCount" class="badge">0</span></button>
+  <button class="btn owner-btn" onclick="openOwner()">🔐 Owner</button>
 
   <!-- CART PANEL -->
   <aside id="cartPanel" class="cart-panel" aria-labelledby="cartTitle" aria-hidden="true">
     <div class="cart-header">
       <strong id="cartTitle">Your Cart (free items)</strong>
-      <div><button class="btn ghost" onclick="toggleCart()">Close</button></div>
+      <div>
+        <button class="btn ghost" onclick="toggleCart()">Close</button>
+      </div>
     </div>
     <div class="cart-body" id="cartItems"></div>
-    <div style="padding:12px;border-top:1px solid rgba(255,255,255,0.03)">
-      <form id="checkoutForm" onsubmit="checkout(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <input class="input" name="name" placeholder="Your Name" required />
-        <input class="input" name="phone" placeholder="Phone" required />
-        <textarea class="input" name="address" style="grid-column:1/-1" placeholder="Address / Pickup preference"></textarea>
+    <div style="padding:12px;border-top:1px solid #1f2937">
+      <form id="checkoutForm" onsubmit="checkout(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+        <input class="input" required name="name" placeholder="Your Name" />
+        <input class="input" required name="phone" placeholder="Phone" />
+        <textarea class="input" style="grid-column:1/-1" name="address" placeholder="Address / Pickup preference"></textarea>
         <button class="btn" style="grid-column:1/-1">Request Claim</button>
       </form>
-      <p class="muted-sm" style="margin-top:8px">We will connect you with donors. Items are free; delivery charges may apply.</p>
+      <p class="note">We will connect you with donors. Items are free; delivery charges may apply.</p>
     </div>
   </aside>
 
   <!-- OWNER / ADMIN DIALOG -->
-  <dialog id="ownerDialog" class="owner">
-    <div class="owner-modal">
-      <form id="ownerLogin" onsubmit="ownerAuth(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <dialog id="ownerDialog">
+    <div class="dialog-inner">
+      <form id="ownerLogin" onsubmit="ownerAuth(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
         <h3 style="grid-column:1/-1;margin:0">Owner / Admin</h3>
-        <input class="input" name="pin" placeholder="Enter PIN (default: 1711)" required />
+        <input class="input" required name="pin" placeholder="Enter PIN (default: last 4 of phone)" />
         <button class="btn" style="grid-column:1/-1">Enter</button>
       </form>
-
-      <div id="ownerPanel" style="display:none;margin-top:12px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div id="ownerPanel" style="display:none">
+        <div class="toolbar" style="margin-top:6px">
           <button class="btn" onclick="exportData()">Export Data (JSON)</button>
-          <label class="btn ghost"><input type="file" accept="application/json" hidden onchange="importData(event)"/> Import</label>
+          <label class="btn ghost" title="Import data JSON"><input type="file" hidden accept="application/json" onchange="importData(event)" />Import</label>
           <button class="btn secondary" onclick="clearAll()">Clear All (local)</button>
         </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px">
           <div class="card">
-            <h4>Items</h4>
-            <table class="table" id="ownerItems" style="width:100%;border-collapse:collapse"></table>
+            <h4 style="margin:0 0 6px">Items</h4>
+            <table class="table" id="ownerItems"></table>
           </div>
           <div class="card">
-            <h4>Orders / Claims</h4>
-            <table class="table" id="ownerOrders" style="width:100%;border-collapse:collapse"></table>
+            <h4 style="margin:0 0 6px">Orders / Claims</h4>
+            <table class="table" id="ownerOrders"></table>
           </div>
           <div class="card">
-            <h4>Messages</h4>
-            <table class="table" id="ownerMsgs" style="width:100%;border-collapse:collapse"></table>
+            <h4 style="margin:0 0 6px">Messages</h4>
+            <table class="table" id="ownerMsgs"></table>
           </div>
         </div>
-
-        <div style="text-align:right;margin-top:12px">
+        <div style="text-align:right;margin-top:10px">
           <button class="btn ghost" onclick="document.getElementById('ownerDialog').close()">Close</button>
         </div>
       </div>
@@ -417,27 +389,29 @@
 
   <footer>
     <div class="container">
-      <div>© <span id="year"></span> GitteCharity (Nurtura). All Rights Reserved.</div>
-      <div class="muted-sm" style="margin-top:6px">Built with care • Single-file MVP • <a href="#about">About</a> • <a href="#get-involved">Get Involved</a></div>
+      <div>© <span id="y"></span> GitteCharity (Nurtura). All Rights Reserved.</div>
+      <div style="margin-top:6px" class="note">Built with love • Single‑file open source • <a href="#about">About</a> • <a href="#get-involved">Get Involved</a> • <a href="#market">Free Items</a></div>
     </div>
   </footer>
 
-  <!-- SCRIPT: complete functionality (localStorage, items, cart, admin, QR, responsive behaviour) -->
   <script>
-    /* ========= local storage helpers ========= */
-    const LS_KEYS = {
-      ITEMS: 'gc_items_v2',
-      CART: 'gc_cart_v2',
-      ORDERS: 'gc_orders_v2',
-      MSGS: 'gc_messages_v2',
-      ANIMALS: 'gc_animals_v2'
-    };
-    function save(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
-    function load(key, fallback){ try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; } catch(e){ return fallback; } }
-    function id(){ return Math.random().toString(36).slice(2,10) }
-    function toast(msg){ /* simple toast */ alert(msg) }
+    /* ==========================================================
+     * GitteCharity — Single‑file static MVP for GitHub Pages
+     * Data persists locally in this browser using localStorage.
+     * Replace placeholders and push to your repo to go live.
+     * ========================================================== */
 
-    /* ======== state ======== */
+    const LS_KEYS = {
+      ITEMS: 'gc_items',
+      CART: 'gc_cart',
+      ORDERS: 'gc_orders',
+      MSGS: 'gc_messages',
+      ANIMALS: 'gc_animals'
+    };
+
+    const $ = (sel, p=document) => p.querySelector(sel);
+    const $$ = (sel, p=document) => [...p.querySelectorAll(sel)];
+
     const state = {
       items: load(LS_KEYS.ITEMS, []),
       cart: load(LS_KEYS.CART, []),
@@ -446,66 +420,44 @@
       animals: load(LS_KEYS.ANIMALS, [])
     };
 
-    /* ======== init samples (first-run) ======== */
-    function initSamples(){
-      if(state.items.length) return;
-      const samples = [
-        { title:'Class 10 Science Book (NCERT)', category:'Books', city:'Bengaluru', desc:'Lightly used — very good condition.', delivery:true },
-        { title:'Winter Jacket — Adult M', category:'Clothes', city:'Pune', desc:'Warm, clean.', delivery:false },
-        { title:'Sports Shoes — size 8', category:'Shoes', city:'Mumbai', desc:'Good grip, lightly used.', delivery:true },
-        { title:'Study Table (compact)', category:'Furniture', city:'Delhi', desc:'Wooden, sturdy', delivery:false }
-      ];
-      state.items = samples.map(s => ({ id:id(), photo:'', contact:'', animal:false, ts:Date.now()-Math.random()*1e7, ...s }));
-      save(LS_KEYS.ITEMS, state.items);
-    }
+    initSamples();
+    renderItems();
+    renderCart();
+    renderAnimals();
+    $('#y').textContent = new Date().getFullYear();
 
-    /* ======== render items (marketplace) ======== */
-    function placeholder(cat){
-      const map = {
-        'Books':'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
-        'Clothes':'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop',
-        'Shoes':'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop',
-        'Electronics':'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop',
-        'School Supplies':'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=800&auto=format&fit=crop',
-        'Furniture':'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800&auto=format&fit=crop',
-        'Kitchen':'https://images.unsplash.com/photo-1488900128323-21503983a07e?q=80&w=800&auto=format&fit=crop',
-        'Other':'https://images.unsplash.com/photo-1554412933-514a83d2f3c5?q=80&w=800&auto=format&fit=crop'
-      };
-      return map[cat] || map['Other'];
-    }
+    /* ---------- Utils ---------- */
+    function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+    function load(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback }catch(e){ return fallback } }
+    function id(){ return Math.random().toString(36).slice(2,10) }
+    function toast(msg){ alert(msg) }
 
+    /* ---------- Filters ---------- */
+    function applyFilters(){ renderItems() }
+    function resetFilters(){ $('#search').value=''; $('#category').value=''; $('#city').value=''; renderItems() }
+
+    /* ---------- Items ---------- */
     function renderItems(){
-      const q = document.getElementById('search').value.trim().toLowerCase();
-      const cat = document.getElementById('category').value;
-      const city = document.getElementById('city').value.trim().toLowerCase();
-      let list = [...state.items].sort((a,b)=>b.ts - a.ts);
-      list = list.filter(i => {
-        const combined = (i.title + ' ' + (i.desc||'') + ' ' + (i.city||'')).toLowerCase();
-        if(q && !combined.includes(q)) return false;
-        if(cat && i.category !== cat) return false;
-        if(city && i.city.toLowerCase() !== city) return false;
-        return true;
-      });
-      const wrap = document.getElementById('items');
-      wrap.innerHTML = '';
-      if(list.length === 0){
-        wrap.innerHTML = `<div class="card">No items yet. Be the first to <a href="#give">give something</a>!</div>`;
-        return;
-      }
-      list.forEach(i => {
+      const q = $('#search').value.trim().toLowerCase();
+      const cat = $('#category').value; const city = $('#city').value;
+      let items = [...state.items].sort((a,b)=>b.ts-a.ts);
+      items = items.filter(i => (!q || (i.title+i.desc+i.city).toLowerCase().includes(q)) && (!cat || i.category===cat) && (!city || i.city.toLowerCase()===city.toLowerCase()));
+      const wrap = $('#items'); wrap.innerHTML='';
+      if(items.length===0){ wrap.innerHTML = `<div class="card">No items yet. Be the first to <a href="#give">give something</a>!` }
+      items.forEach(i=>{
         const el = document.createElement('div');
         el.className = 'card item';
         el.innerHTML = `
-          <img src="${i.photo || placeholder(i.category)}" alt="${escapeHtml(i.title)}" />
+          <img src="${i.photo || placeholder(i.category)}" alt="${i.title}"/>
           <div class="meta">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-              <div style="flex:1">
-                <strong>${escapeHtml(i.title)}</strong> <div class="badge">${escapeHtml(i.category)}</div>
-                <div class="muted-sm">${escapeHtml(i.city)}${i.delivery? ' • Delivery available':''}</div>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between">
+              <div>
+                <strong>${i.title}</strong> <span class="badge">${i.category}</span>
+                <div class="muted">${i.city}${i.delivery? ' • Delivery available':''}</div>
               </div>
-              <div style="min-width:68px;text-align:right;color:#9ef0c8;font-weight:700">FREE</div>
+              <div class="price">FREE</div>
             </div>
-            <div class="muted-sm" style="margin:8px 0">${escapeHtml(i.desc || '')}</div>
+            <div class="muted" style="margin:6px 0 8px">${i.desc || ''}</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <button class="btn" onclick='addToCart("${i.id}")'>Add to Cart</button>
               <button class="btn secondary" onclick='shareItem("${i.id}")'>Share</button>
@@ -513,264 +465,217 @@
             </div>
           </div>`;
         wrap.appendChild(el);
-      });
+      })
     }
 
-    function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])) }
+    function placeholder(cat){
+      const m = {
+        'Books':'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+        'Clothes':'https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=800&auto=format&fit=crop',
+        'Shoes':'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop',
+        'Electronics':'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop',
+        'School Supplies':'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=800&auto=format&fit=crop',
+        'Furniture':'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800&auto=format&fit=crop',
+        'Kitchen':'https://images.unsplash.com/photo-1488900128323-21503983a07e?q=80&w=800&auto=format&fit=crop',
+        'Other':'https://images.unsplash.com/photo-1554412933-514a83d2f3c5?q=80&w=800&auto=format&fit=crop'
+      };
+      return m[cat] || m['Other'];
+    }
 
-    /* ======== add item (store images as dataURL for persistence) ======== */
     async function readFileAsDataURL(file){
       if(!file) return '';
-      return await new Promise((res, rej) => {
+      return await new Promise((res,rej)=>{
         const fr = new FileReader();
         fr.onload = ()=>res(fr.result);
         fr.onerror = rej;
         fr.readAsDataURL(file);
-      });
+      })
     }
 
     async function addItem(e){
       e.preventDefault();
       const fd = new FormData(e.target);
-      const photoFile = fd.get('photo');
-      let dataURL = '';
-      if(photoFile && photoFile.size) {
-        try { dataURL = await readFileAsDataURL(photoFile) } catch(e){ console.warn('image read failed', e) }
-      }
+      const photo = await readFileAsDataURL(fd.get('photo'));
       const item = {
-        id: id(),
+        id:id(),
         title: fd.get('title').trim(),
         category: fd.get('category'),
         city: fd.get('city').trim(),
         contact: fd.get('contact').trim(),
         desc: fd.get('desc').trim(),
-        delivery: fd.get('delivery') === 'on',
-        animal: fd.get('animal') === 'on',
-        photo: dataURL || '',
+        delivery: fd.get('delivery')==='on',
+        animal: fd.get('animal')==='on',
+        photo,
         ts: Date.now()
-      };
-      state.items.push(item);
-      save(LS_KEYS.ITEMS, state.items);
-      e.target.reset();
-      renderItems();
-      toast('Item posted locally (visible on this device).');
+      }
+      state.items.push(item); save(LS_KEYS.ITEMS, state.items);
+      e.target.reset(); renderItems(); toast('Item posted locally! (Visible on this device).')
     }
 
-    /* ======== cart logic (add/remove/render/checkout) ======== */
     function addToCart(itemId){
-      const item = state.items.find(x=>x.id===itemId);
-      if(!item){ toast('Item not found'); return; }
-      if(state.cart.find(c=>c.id===item.id)){ toast('Already in cart'); return; }
-      state.cart.push({...item, cartTs: Date.now()});
-      save(LS_KEYS.CART, state.cart);
-      renderCart();
-      toggleCart(true);
+      const item = state.items.find(i=>i.id===itemId);
+      if(!item){ toast('Item not found'); return }
+      if(state.cart.find(c=>c.id===item.id)){ toast('Already in cart'); return }
+      state.cart.push({ ...item, cartTs: Date.now() }); save(LS_KEYS.CART, state.cart); renderCart(); toggleCart(true)
     }
 
     function renderCart(){
-      const out = state.cart.map(c => `
-        <div class="cart-item">
-          <img src="${c.photo || placeholder(c.category)}" alt="${escapeHtml(c.title)}" />
-          <div style="flex:1">
-            <div><strong>${escapeHtml(c.title)}</strong></div>
-            <div class="muted-sm">${escapeHtml(c.city)} • ${escapeHtml(c.category)}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <button class="btn ghost" onclick='removeFromCart("${c.id}")'>Remove</button>
-          </div>
-        </div>
-      `).join('') || '<div class="muted-sm">Cart is empty</div>';
-      document.getElementById('cartItems').innerHTML = out;
-      document.getElementById('cartCount').textContent = state.cart.length;
-      const float = document.getElementById('cartCountFloat'); if(float) float.textContent = state.cart.length;
-      const float2 = document.getElementById('cartCount'); if(float2) float2.textContent = state.cart.length;
+      const out = state.cart.map(c=>{
+        return `<div class="cart-item"><img src="${c.photo || placeholder(c.category)}" alt="${c.title}"/><div style="flex:1"><div><strong>${c.title}</strong></div><div class="muted">${c.city} • ${c.category}</div></div><button class="btn ghost" onclick='removeFromCart("${c.id}")'>Remove</button></div>`
+      }).join('') || '<div class="muted">Cart is empty</div>';
+      $('#cartItems').innerHTML = out;
+      $('#cartCount').textContent = state.cart.length;
     }
 
-    function removeFromCart(id0){
-      state.cart = state.cart.filter(x=>x.id !== id0);
-      save(LS_KEYS.CART, state.cart);
-      renderCart();
-    }
-
-    function toggleCart(force){
-      const p = document.getElementById('cartPanel');
-      const open = (typeof force === 'boolean') ? force : !p.classList.contains('open');
-      p.classList.toggle('open', open);
-      p.setAttribute('aria-hidden', !open);
-      renderCart();
-    }
+    function removeFromCart(id0){ state.cart = state.cart.filter(x=>x.id!==id0); save(LS_KEYS.CART, state.cart); renderCart(); }
+    function toggleCart(force){ const p = $('#cartPanel'); p.classList.toggle('open', force ?? !p.classList.contains('open')); p.setAttribute('aria-hidden', !p.classList.contains('open')) }
 
     function checkout(e){
-      if(e) e.preventDefault();
-      if(state.cart.length === 0){ toast('Cart is empty'); return; }
-      // Build WhatsApp message with items
-      const lines = state.cart.map(it => `• ${it.title} (${it.city})`).join('%0A');
-      const msg = `Hello GitteCharity, I would like to claim these free items:%0A${lines}%0A%0AName:%0APhone:%0APickup/Delivery preference:%0A`;
-      const wa = `https://wa.me/919860191711?text=${msg}`;
-      window.open(wa, '_blank');
-      // Save order locally
+      e.preventDefault();
+      if(state.cart.length===0){ toast('Cart is empty'); return }
+      const fd = new FormData(e.target);
       const order = {
         id: id(),
-        name: 'WhatsApp checkout',
-        phone: '',
-        address: '',
+        name: fd.get('name').trim(),
+        phone: fd.get('phone').trim(),
+        address: fd.get('address').trim(),
         items: state.cart.map(({id,title,category,city})=>({id,title,category,city})),
         ts: Date.now(),
         status: 'Requested'
       };
-      state.orders.push(order);
-      save(LS_KEYS.ORDERS, state.orders);
-      state.cart = []; save(LS_KEYS.CART, state.cart); renderCart();
-      toast('Request sent via WhatsApp. We will connect you.');
+      state.orders.push(order); save(LS_KEYS.ORDERS, state.orders);
+      state.cart = []; save(LS_KEYS.CART, state.cart); renderCart(); e.target.reset();
+      toast('Request submitted! We will contact you.');
     }
 
-    /* ======== contact / messages / volunteers / animals ======== */
+    function contactDonor(id0){
+      const it = state.items.find(x=>x.id===id0);
+      const c = it?.contact?.trim();
+      if(!c){ toast('No contact provided by donor. Add to cart and request claim.'); return }
+      if(/@/.test(c)) window.location.href = `mailto:${c}?subject=About your item: ${encodeURIComponent(it.title)}`;
+      else window.location.href = `tel:${c}`;
+    }
+
+    function shareItem(id0){
+      const it = state.items.find(x=>x.id===id0);
+      const url = location.href.split('#')[0];
+      const text = `Free on GitteCharity: ${it.title} (${it.city})`;
+      if(navigator.share){ navigator.share({title:'GitteCharity', text, url}); }
+      else { navigator.clipboard.writeText(`${text} — ${url}`).then(()=>toast('Link copied!')) }
+    }
+
+    /* ---------- Messages / Volunteers ---------- */
     function submitMessage(e, bucket){
       e.preventDefault();
       const fd = new FormData(e.target);
       const rec = Object.fromEntries(fd.entries());
-      rec.id = id(); rec.ts = Date.now(); rec.bucket = bucket;
-      state.messages.push(rec); save(LS_KEYS.MSGS, state.messages);
+      rec.id = id(); rec.ts = Date.now();
+      state.messages.push({bucket, ...rec});
+      save(LS_KEYS.MSGS, state.messages);
       e.target.reset(); toast('Thanks! We will reach out.');
     }
 
+    /* ---------- Animal Help ---------- */
     function submitAnimal(e){
       e.preventDefault();
       const fd = new FormData(e.target);
       const rec = Object.fromEntries(fd.entries());
       rec.id = id(); rec.ts = Date.now();
-      state.animals.push(rec); save(LS_KEYS.ANIMALS, state.animals);
-      e.target.reset(); renderAnimals(); toast('Animal post recorded (local).');
+      state.animals.push(rec); save(LS_KEYS.ANIMALS, state.animals); e.target.reset(); renderAnimals(); toast('Animal post recorded (local).')
     }
-
     function renderAnimals(){
-      const wrap = document.getElementById('animalList'); wrap.innerHTML = '';
+      const wrap = $('#animalList'); wrap.innerHTML='';
       state.animals.slice().reverse().forEach(a=>{
-        const el = document.createElement('div'); el.className = 'card';
-        el.innerHTML = `<strong>${escapeHtml(a.title||a.name||'')}</strong> <div class="muted-sm">${escapeHtml(a.city||'')}</div><div class="muted-sm" style="margin-top:6px">${escapeHtml(a.desc||'')}</div><div class="muted-sm">${escapeHtml(a.contact||'')}</div>`;
+        const el = document.createElement('div'); el.className='card';
+        el.innerHTML = `<strong>${a.title}</strong> <span class="badge">${a.city}</span><div class="muted">${a.desc||''}</div><div class="note">${a.contact||''}</div>`;
         wrap.appendChild(el);
-      });
+      })
     }
 
-    /* ======== share / contact donor ======== */
-    function contactDonor(id0){
-      const it = state.items.find(x=>x.id===id0);
-      const c = it?.contact?.trim();
-      if(!c){ toast('No contact provided by donor. Add to cart and request claim.'); return; }
-      if(/@/.test(c)) location.href = `mailto:${c}?subject=About your item: ${encodeURIComponent(it.title)}`;
-      else location.href = `tel:${c}`;
+    /* ---------- Donate / UPI QR ---------- */
+    function openDonate(open=true){ $('#donateWidget').classList.toggle('open', open) }
+    function makeUpiQR(){
+      const suffix = $('#upiProvider').value;
+      const amount = $('#upiAmount').value || '';
+      const note = $('#upiNote').value || 'Donation to GitteCharity';
+      // You can change the handle domain as needed per your wallet
+      const vpa = `9860191711${suffix}`; // e.g., 9860191711@ybl / @paytm / @axl
+      const params = new URLSearchParams({ pa: vpa, pn: 'GitteCharity', tn: note, cu: 'INR' });
+      if(amount) params.set('am', amount);
+      const uri = `upi://pay?${params.toString()}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(uri)}`;
+      $('#qrWrap').innerHTML = `<img alt="UPI QR" src="${qrUrl}" style="margin:auto;border-radius:12px;border:1px solid #1f2937"/><div class="note" style="margin-top:6px">VPA: <code>${vpa}</code></div>`;
     }
 
-    function shareItem(id0){
-      const it = state.items.find(x=>x.id===id0);
-      const url = location.href.split('#')[0] + '#market';
-      const text = `Free on GitteCharity: ${it.title} (${it.city}) — ${url}`;
-      if(navigator.share){ navigator.share({title:'GitteCharity', text, url}).catch(()=>{}); }
-      else { navigator.clipboard?.writeText(text).then(()=>toast('Link copied!')).catch(()=>{}); }
-    }
-
-    /* ======== owner / admin (import/export/clear) ======== */
-    function openOwner(){ document.getElementById('ownerDialog').showModal(); }
+    /* ---------- Owner / Admin ---------- */
+    function openOwner(){ $('#ownerDialog').showModal() }
     function ownerAuth(e){
       e.preventDefault();
       const pin = new FormData(e.target).get('pin').trim();
-      // default PIN: 1711 (change if you want)
-      if(pin !== '1711'){ toast('Wrong PIN'); return; }
-      document.getElementById('ownerLogin').style.display = 'none';
-      document.getElementById('ownerPanel').style.display = 'block';
+      // Default PIN = last 4 digits of phone
+      const ok = pin === '1711';
+      if(!ok){ toast('Wrong PIN'); return }
+      $('#ownerLogin').style.display='none';
+      $('#ownerPanel').style.display='block';
       ownerRefresh();
     }
 
     function ownerRefresh(){
-      const itRows = state.items.map(i=>`<tr><td>${escapeHtml(i.title)}</td><td>${escapeHtml(i.city)}</td><td>${escapeHtml(i.category)}</td><td><button class="btn ghost" onclick='delItem("${i.id}")'>Delete</button></td></tr>`).join('') || '<tr><td class="muted-sm">No items</td></tr>';
-      document.getElementById('ownerItems').innerHTML = `<tr><th>Title</th><th>City</th><th>Cat</th><th></th></tr>${itRows}`;
-
-      const od = state.orders.map(o=>`<tr><td>${escapeHtml(o.name||'')}</td><td>${escapeHtml(o.phone||'')}</td><td>${o.items.length}</td><td>${new Date(o.ts).toLocaleString()}</td></tr>`).join('') || '<tr><td class="muted-sm">No orders</td></tr>';
-      document.getElementById('ownerOrders').innerHTML = `<tr><th>Name</th><th>Phone</th><th>Count</th><th>Time</th></tr>${od}`;
-
-      const ms = state.messages.map(m=>`<tr><td>${escapeHtml(m.bucket||'')}</td><td>${escapeHtml(m.name||'')}</td><td>${escapeHtml(m.phone||'')}</td><td>${escapeHtml((m.msg||m.text||'').slice(0,60))}</td></tr>`).join('') || '<tr><td class="muted-sm">No messages</td></tr>';
-      document.getElementById('ownerMsgs').innerHTML = `<tr><th>Type</th><th>Name</th><th>Phone</th><th>Message</th></tr>${ms}`;
+      // Items
+      const it = state.items.map(i=>`<tr><td>${i.title}</td><td>${i.city}</td><td>${i.category}</td><td><button class="btn ghost" onclick='delItem("${i.id}")'>Delete</button></td></tr>`).join('') || '<tr><td class="muted">No items</td></tr>';
+      $('#ownerItems').innerHTML = `<tr><th>Title</th><th>City</th><th>Category</th><th></th></tr>${it}`;
+      // Orders
+      const od = state.orders.map(o=>`<tr><td>${o.name}</td><td>${o.phone}</td><td>${o.items.length} items</td><td>${new Date(o.ts).toLocaleString()}</td></tr>`).join('') || '<tr><td class="muted">No orders</td></tr>';
+      $('#ownerOrders').innerHTML = `<tr><th>Name</th><th>Phone</th><th>Count</th><th>Time</th></tr>${od}`;
+      // Messages
+      const ms = state.messages.map(m=>`<tr><td>${m.bucket}</td><td>${m.name||''}</td><td>${m.phone||''}</td><td>${(m.msg||'').slice(0,40)}</td></tr>`).join('') || '<tr><td class="muted">No messages</td></tr>';
+      $('#ownerMsgs').innerHTML = `<tr><th>Type</th><th>Name</th><th>Phone</th><th>Message</th></tr>${ms}`;
     }
 
-    function delItem(id0){ state.items = state.items.filter(i=>i.id !== id0); save(LS_KEYS.ITEMS, state.items); renderItems(); ownerRefresh(); }
+    function delItem(id0){ state.items = state.items.filter(i=>i.id!==id0); save(LS_KEYS.ITEMS, state.items); renderItems(); ownerRefresh(); }
 
     function exportData(){
-      const data = { items: state.items, cart: state.cart, orders: state.orders, messages: state.messages, animals: state.animals };
+      const data = {
+        items: state.items, cart: state.cart, orders: state.orders, messages: state.messages, animals: state.animals
+      };
       const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='gittecharity-data.json'; a.click(); URL.revokeObjectURL(url);
+      const url = URL.createObjectURL(blob);
+      const a = Object.assign(document.createElement('a'), {href:url, download:'gittecharity-data.json'});
+      a.click(); URL.revokeObjectURL(url);
     }
 
     function importData(e){
       const f = e.target.files[0]; if(!f) return;
-      const r = new FileReader(); r.onload = ()=>{
+      const reader = new FileReader(); reader.onload = () => {
         try{
-          const data = JSON.parse(r.result);
-          state.items = data.items || state.items; save(LS_KEYS.ITEMS, state.items);
-          state.cart = data.cart || state.cart; save(LS_KEYS.CART, state.cart);
-          state.orders = data.orders || state.orders; save(LS_KEYS.ORDERS, state.orders);
-          state.messages = data.messages || state.messages; save(LS_KEYS.MSGS, state.messages);
-          state.animals = data.animals || state.animals; save(LS_KEYS.ANIMALS, state.animals);
-          renderItems(); renderCart(); renderAnimals(); ownerRefresh();
-          toast('Imported!');
-        } catch(err){ toast('Invalid JSON'); }
-      }; r.readAsText(f);
-    }
-
-    function clearAll(){ if(confirm('Clear all local data?')){ Object.values(LS_KEYS).forEach(k=>localStorage.removeItem(k)); location.reload(); } }
-
-    /* ======== UPI QR generation (dynamic) ======== */
-    function openDonate(show=true){ document.getElementById('donateWidget').classList.toggle('open', !!show); }
-    function makeUpiQR(){
-      const suffix = document.getElementById('upiProvider').value || '@upi';
-      const amount = (document.getElementById('upiAmount').value || '').trim();
-      const note = (document.getElementById('upiNote').value || 'Donation to GitteCharity');
-      const vpa = `9860191711${suffix}`;
-      const params = new URLSearchParams({ pa: vpa, pn: 'GitteCharity', tn: note, cu: 'INR' });
-      if(amount) params.set('am', amount);
-      const uri = `upi://pay?${params.toString()}`;
-      const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(uri)}`;
-      document.getElementById('qrWrap').innerHTML = `<img alt="UPI QR" src="${qrApi}" style="border-radius:10px;border:1px solid rgba(255,255,255,0.04)"/><div class="muted-sm" style="margin-top:8px">VPA: <code style="color:#fff">${vpa}</code></div>`;
-    }
-
-    /* ======== Mobile menu helpers ======== */
-    function toggleMobileMenu(){ const m = document.getElementById('mobileMenu'); m.style.display = (m.style.display === 'none' || m.style.display === '') ? 'block' : 'none'; }
-    function closeMobileMenu(){ document.getElementById('mobileMenu').style.display = 'none'; }
-
-    /* ======== helper boot ======== */
-    function renderCart(); // forward declare for linter friendliness
-    function renderItems(); // forward declare
-    // initialize
-    (function init(){
-      document.getElementById('year').textContent = new Date().getFullYear();
-      initSamples();
-      renderItems();
-      renderCart = function(){ // define now to ensure DOM exists
-        const out = state.cart.map(c => `
-          <div class="cart-item">
-            <img src="${c.photo || placeholder(c.category)}" alt="${escapeHtml(c.title)}" />
-            <div style="flex:1"><div><strong>${escapeHtml(c.title)}</strong></div><div class="muted-sm">${escapeHtml(c.city)} • ${escapeHtml(c.category)}</div></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><button class="btn ghost" onclick='removeFromCart("${c.id}")'>Remove</button></div>
-          </div>`).join('') || '<div class="muted-sm">Cart is empty</div>';
-        document.getElementById('cartItems').innerHTML = out;
-        document.getElementById('cartCount').textContent = state.cart.length;
-        const f = document.getElementById('cartCountFloat'); if(f) f.textContent = state.cart.length;
-        const f2 = document.getElementById('cartCount'); if(f2) f2.textContent = state.cart.length;
+          const data = JSON.parse(reader.result);
+          state.items = data.items || []; save(LS_KEYS.ITEMS, state.items);
+          state.cart = data.cart || []; save(LS_KEYS.CART, state.cart);
+          state.orders = data.orders || []; save(LS_KEYS.ORDERS, state.orders);
+          state.messages = data.messages || []; save(LS_KEYS.MSGS, state.messages);
+          state.animals = data.animals || []; save(LS_KEYS.ANIMALS, state.animals);
+          renderItems(); renderCart(); renderAnimals(); ownerRefresh(); toast('Imported!');
+        }catch(err){ toast('Invalid JSON') }
       };
-      renderCart();
-      renderAnimals();
-      // wire search inputs (debounce light)
-      ['search','category','city'].forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.addEventListener('input', () => setTimeout(applyFilters, 120));
-      });
-      // ensure QR default
-      makeUpiQR();
-    })();
+      reader.readAsText(f);
+    }
 
-    /* ======== misc small utils ======== */
-    function applyFilters(){ renderItems(); }
-    function resetFilters(){ document.getElementById('search').value=''; document.getElementById('category').value=''; document.getElementById('city').value=''; renderItems(); }
-    function toggleCart(force){ const p=document.getElementById('cartPanel'); const open = (typeof force === 'boolean') ? force : !p.classList.contains('open'); if(window.matchMedia && window.matchMedia('(max-width:680px)').matches){ p.style.transform = open ? 'translateY(0)' : 'translateY(102%)'; p.classList.toggle('open', open);} else { p.classList.toggle('open', open); } renderCart(); }
+    function clearAll(){ if(confirm('Clear all local data?')){ Object.values(LS_KEYS).forEach(k=>localStorage.removeItem(k)); location.reload() } }
+
+    /* ---------- Sample data (first run only) ---------- */
+    function initSamples(){
+      if(state.items.length) return;
+      const samples=[
+        {title:'Class 10 Science Book',category:'Books',city:'Bengaluru',desc:'CBSE NCERT, lightly used.',delivery:true},
+        {title:'Winter Jackets (2)',category:'Clothes',city:'Pune',desc:'Clean, good condition, adult size M & L.',delivery:false},
+        {title:'Sports Shoes Size 8',category:'Shoes',city:'Mumbai',desc:'Barely worn, good grip.',delivery:true},
+        {title:'Geometry Box & Notebooks',category:'School Supplies',city:'Hyderabad',desc:'For 1 student, 6 notebooks + box.',delivery:true},
+        {title:'Study Table',category:'Furniture',city:'Delhi',desc:'Compact wooden desk.',delivery:false},
+        {title:'Rice Cooker',category:'Kitchen',city:'Chennai',desc:'Working perfectly.',delivery:true}
+      ];
+      state.items = samples.map(s=>({id:id(),photo:'',contact:'',animal:false,ts:Date.now()-Math.random()*9e7,...s}));
+      save(LS_KEYS.ITEMS, state.items);
+    }
   </script>
 </body>
 </html>
