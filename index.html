@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GitteCharity (Nurtura) — Empowering Lives, Nurturing Communities</title>
-  <meta name="description" content="GitteCharity (Nurtura) is a volunteer‑driven initiative helping with education, food, shelter, and animal welfare. Donate, volunteer, give or claim free items." />
+  <meta name="description" content="GitteCharity (Nurtura) is a volunteer-driven initiative helping with education, food, shelter, and animal welfare. Donate, volunteer, give or claim free items." />
   <meta name="theme-color" content="#4f46e5" />
   <style>
     :root{
@@ -21,6 +21,7 @@
       --card:#0b1022cc;      /* translucent */
       --shadow: 0 10px 30px rgb(0 0 0 / 25%);
       --radius: 18px;
+      --max-width:1100px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Noto Sans,sans-serif}
@@ -28,49 +29,51 @@
     a:hover{text-decoration:underline}
     img{max-width:100%;display:block}
     button{cursor:pointer}
-    .container{max-width:1100px;margin-inline:auto;padding:28px}
-    .grid{display:grid;gap:18px}
+    .container{max-width:var(--max-width);margin-inline:auto;padding:20px}
+    .grid{display:grid;gap:16px}
     .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
-    @media (max-width:640px){.grid-3{grid-template-columns:1fr}}
+
+    /* small tweaks for form elements */
+    .input,.select,textarea{background:#0b1022;border:1px solid #233047;color:var(--text);padding:10px 12px;border-radius:12px;outline:none;font:inherit}
+    .input:focus,.select:focus,textarea:focus{border-color:#3b82f6}
 
     /* NAV */
-    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, #0b1022f2, #0b102200);backdrop-filter: blur(8px);}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 22px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo-badge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#8b5cf6);box-shadow:var(--shadow)}
-    .logo-badge svg{width:26px;height:26px}
-    .nav a{margin:0 10px;color:#e5e7eb}
-    .btn{border:0;border-radius:999px;padding:10px 16px;background:var(--brand);color:white;box-shadow:var(--shadow)}
+    .nav{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, #0b1022f2, #0b102200);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,0.02)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 22px;gap:12px;max-width:var(--max-width);margin:auto}
+    .logo{display:flex;align-items:center;gap:12px;min-width:0}
+    .logo-badge{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#8b5cf6);box-shadow:var(--shadow)}
+    .logo-badge svg{width:28px;height:28px}
+    .nav-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .nav-links a{margin:0 8px;color:#e5e7eb;padding:8px;border-radius:10px}
+    .menu-toggle{display:none;background:transparent;border:0;color:var(--text);font-size:22px;padding:8px}
+    .btn{border:0;border-radius:999px;padding:10px 16px;background:var(--brand);color:white;box-shadow:var(--shadow);font-weight:600}
     .btn.secondary{background:#1f2937}
     .btn.ghost{background:transparent;border:1px solid #334155}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2937;border:1px solid #334155;font-size:12px;color:#cbd5e1}
 
     /* HERO */
-    .hero{position:relative;min-height:70vh;display:grid;place-items:center;overflow:hidden}
+    .hero{position:relative;min-height:62vh;display:grid;place-items:center;overflow:hidden}
     .hero video,.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.35)}
-    .hero .overlay{position:relative;text-align:center;padding:40px}
-    .hero h1{font-size:clamp(28px,4vw,48px);line-height:1.1;margin:0 0 14px}
+    .hero .overlay{position:relative;text-align:center;padding:28px}
+    .hero h1{font-size:clamp(26px,5vw,44px);line-height:1.05;margin:0 0 12px}
     .pill{display:inline-flex;align-items:center;gap:8px;background:#1f2937;border:1px solid #334155;color:#cbd5e1;border-radius:999px;padding:6px 12px;font-size:14px}
 
     /* SECTION */
-    section{padding:30px 0;border-top:1px solid #0b122a}
-    h2{font-size:clamp(22px,2.4vw,28px);margin:0 0 8px}
+    section{padding:26px 0;border-top:1px solid #0b122a}
+    h2{font-size:clamp(20px,2.4vw,26px);margin:0 0 8px}
     .muted{color:var(--muted)}
-    .card{background:var(--card);border:1px solid #1e293b;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card{background:var(--card);border:1px solid #1e293b;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 
     /* MARKET */
     .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-    .input,.select,textarea{background:#0b1022;border:1px solid #233047;color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
-    .input:focus,.select:focus,textarea:focus{border-color:#3b82f6}
-    .item{display:flex;gap:12px}
+    .item{display:flex;gap:12px;align-items:flex-start}
     .item img{width:120px;height:100px;border-radius:12px;object-fit:cover;border:1px solid #1f2937}
     .item .meta{flex:1}
-    .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2937;border:1px solid #334155;font-size:12px;color:#cbd5e1}
     .price{color:#a7f3d0}
 
     /* CART */
     .cart-toggle{position:fixed;right:20px;bottom:20px;z-index:60}
-    .cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,90vw);background:#0a0f22;border-left:1px solid #1f2937;box-shadow:var(--shadow);transform:translateX(102%);transition:.3s;z-index:70;display:flex;flex-direction:column}
+    .cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,90vw);background:#0a0f22;border-left:1px solid #1f2937;box-shadow:var(--shadow);transform:translateX(102%);transition:.28s;z-index:70;display:flex;flex-direction:column}
     .cart-panel.open{transform:translateX(0)}
     .cart-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #1f2937}
     .cart-body{flex:1;overflow:auto;padding:14px}
@@ -80,24 +83,79 @@
     /* DONATION QR WIDGET */
     .donate-widget{position:fixed;right:20px;bottom:90px;background:#0a0f22;border:1px solid #1f2937;border-radius:16px;box-shadow:var(--shadow);padding:14px;width:300px;display:none;z-index:65}
     .donate-widget.open{display:block}
-    .note{font-size:12px;color:#94a3b8}
 
     /* OWNER PANEL */
     .owner-btn{position:fixed;left:20px;bottom:20px;z-index:60}
     dialog{border:none;border-radius:16px;background:#0a0f22;color:var(--text);padding:0;box-shadow:var(--shadow)}
-    dialog .dialog-inner{padding:18px;min-width:min(520px,92vw)}
+    dialog .dialog-inner{padding:14px;min-width:min(520px,92vw)}
     .table{width:100%;border-collapse:collapse}
     .table th,.table td{border-bottom:1px solid #1f2937;padding:8px 6px;text-align:left}
 
     /* FOOTER */
-    footer{padding:30px 0;color:#a5b4fc;text-align:center;border-top:1px solid #0b122a}
+    footer{padding:24px 0;color:#a5b4fc;text-align:center;border-top:1px solid #0b122a}
+
+    /* small helpers */
+    .muted-small{color:var(--muted);font-size:13px}
+    .note{font-size:12px;color:#94a3b8}
+
+    /* ===========================
+       RESPONSIVE ADJUSTMENTS
+       (stack columns, larger tappable targets,
+       hamburger nav, scalable images)
+    ============================ */
+
+    /* Nav collapse on small screens */
+    @media (max-width:880px){
+      .nav-inner{padding:10px 16px}
+      .nav-links{display:none}
+      .menu-toggle{display:inline-flex}
+      .menu-toggle{align-items:center;justify-content:center;padding:8px;border-radius:10px}
+      .nav.open .nav-links{display:flex;flex-direction:column;position:absolute;right:16px;top:64px;background:linear-gradient(180deg,#061026cc,#02061266);padding:10px;border-radius:12px;border:1px solid #112233}
+      .logo strong{font-size:16px}
+    }
+
+    /* Make hero and buttons friendlier on small screens */
+    @media (max-width:640px){
+      :root{--radius:12px}
+      .container{padding:16px}
+      .hero{min-height:46vh}
+      .hero .overlay{padding:18px}
+      .hero h1{font-size:clamp(20px,7vw,34px)}
+      .nav-inner{gap:8px}
+      .nav-links a{margin:4px 0;padding:10px 14px;display:block}
+      .grid{gap:12px}
+      .card{padding:12px;border-radius:14px}
+      .item{flex-direction:column;align-items:stretch}
+      .item img{width:100%;height:auto;max-height:220px;object-fit:cover}
+      .toolbar{flex-direction:column;align-items:stretch}
+      .toolbar .input,.toolbar .select,.toolbar button{width:100%}
+      .cart-panel{width:100vw;right:0;left:0;bottom:0;top:auto;height:60vh;border-left:0;border-top:1px solid #1f2937}
+      dialog .dialog-inner{min-width:92vw;padding:12px}
+      .donate-widget{width:calc(100% - 40px);right:20px;left:20px;bottom:80px}
+      .owner-btn,.cart-toggle{right:16px;left:auto}
+      .cart-toggle{bottom:16px}
+      .owner-btn{left:16px;bottom:16px}
+      .pill{font-size:13px;padding:6px 10px}
+      .logo-badge{width:38px;height:38px}
+    }
+
+    /* Very small phones */
+    @media (max-width:420px){
+      .hero h1{font-size:22px}
+      .nav-inner{padding:8px}
+      .menu-toggle{font-size:20px}
+    }
+
+    /* make tables scroll horizontally */
+    .table-wrap{overflow:auto}
+
   </style>
 </head>
 <body>
   <!-- NAVBAR -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <div class="logo">
+      <div class="logo" style="gap:10px">
         <div class="logo-badge" aria-label="GitteCharity logo" title="GitteCharity">
           <!-- Heart + Paw inline SVG -->
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -105,9 +163,15 @@
             <circle cx="18.5" cy="6.5" r="2.2" fill="#0ea5e9"/>
           </svg>
         </div>
-        <strong>GitteCharity</strong>&nbsp;<span class="muted">(Nurtura)</span>
+        <div style="min-width:0">
+          <strong style="display:block;line-height:1">GitteCharity</strong>
+          <span class="muted-small" style="display:block"> (Nurtura)</span>
+        </div>
       </div>
-      <div>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" title="Open menu" onclick="toggleMenu()">☰</button>
+
+      <div id="nav-links" class="nav-links" style="display:flex;align-items:center;gap:8px">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#market">Free Items</a>
@@ -120,7 +184,7 @@
   </nav>
 
   <!-- HERO -->
-  <header id="home" class="hero">
+  <header id="home" class="hero" role="banner">
     <!-- Optional background video: replace src with your own bg.mp4 in repo -->
     <video autoplay muted loop playsinline poster="" onerror="this.style.display='none'">
       <!-- You can replace the below with your own hosted video or remove the <video> entirely -->
@@ -143,7 +207,7 @@
     <div class="container grid" style="grid-template-columns:1.2fr .8fr;gap:22px">
       <div class="card">
         <h2>About GitteCharity (Nurtura)</h2>
-        <p>GitteCharity is a charitable initiative dedicated to <strong>education</strong>, <strong>food</strong>, <strong>shelter</strong>, and <strong>animal welfare</strong>. We connect donors with people who need essentials — ensuring dignity through a simple, transparent and community‑driven platform.</p>
+        <p>GitteCharity is a charitable initiative dedicated to <strong>education</strong>, <strong>food</strong>, <strong>shelter</strong>, and <strong>animal welfare</strong>. We connect donors with people who need essentials — ensuring dignity through a simple, transparent and community-driven platform.</p>
         <p class="muted">We are building a safe marketplace where anyone can <em>give</em> an item or <em>claim</em> an item for free. Owners may ask claimants to pay delivery charges only. Cash donations help us expand reach.</p>
         <div class="grid grid-3" style="margin-top:8px">
           <div class="card"><div class="badge">200k+ Impact</div><div class="muted">Target lives supported through our network over time.</div></div>
@@ -159,7 +223,7 @@
           <a class="btn secondary" href="#contact">Request Help / Message</a>
           <button class="btn ghost" onclick="openOwner()">Owner / Admin</button>
         </div>
-        <p class="note" style="margin-top:10px">Tip: Star &amp; fork this repo to contribute features. Single‑file build for GitHub Pages.</p>
+        <p class="note" style="margin-top:10px">Tip: Star &amp; fork this repo to contribute features. Single-file build for GitHub Pages.</p>
       </div>
     </div>
   </section>
@@ -170,9 +234,9 @@
       <h2>Free Items Marketplace</h2>
       <p class="muted">Claim items for free (pay only delivery if needed). Use filters to find what you need.</p>
 
-      <div class="toolbar">
+      <div class="toolbar" role="search" aria-label="Marketplace filters">
         <input id="search" class="input" placeholder="Search items (e.g., books, shoes, laptop bag)" />
-        <select id="category" class="select">
+        <select id="category" class="select" aria-label="Category">
           <option value="">All categories</option>
           <option>Books</option>
           <option>Clothes</option>
@@ -183,7 +247,7 @@
           <option>Kitchen</option>
           <option>Other</option>
         </select>
-        <select id="city" class="select">
+        <select id="city" class="select" aria-label="City">
           <option value="">All cities</option>
           <option>Bengaluru</option>
           <option>Mumbai</option>
@@ -197,7 +261,7 @@
         <button class="btn ghost" onclick="resetFilters()">Reset</button>
       </div>
 
-      <div id="items" class="grid"></div>
+      <div id="items" class="grid" aria-live="polite"></div>
 
       <div id="give" class="card" style="margin-top:18px">
         <h3 style="margin:0 0 8px">Give an Item</h3>
@@ -213,8 +277,8 @@
           <label class="note" style="grid-column:1/-1">Photo (JPG/PNG, will be stored locally in your browser only):</label>
           <input class="input" style="grid-column:1/-1" type="file" accept="image/*" name="photo" />
           <div style="grid-column:1/-1;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-            <label><input type="checkbox" name="delivery" /> Delivery available (charges may apply)</label>
-            <label><input type="checkbox" name="animal" /> Animal‑related item</label>
+            <label style="display:flex;gap:6px;align-items:center"><input type="checkbox" name="delivery" /> Delivery available (charges may apply)</label>
+            <label style="display:flex;gap:6px;align-items:center"><input type="checkbox" name="animal" /> Animal-related item</label>
           </div>
           <button class="btn" style="grid-column:1/-1">Post Item</button>
         </form>
@@ -249,7 +313,7 @@
     <div class="container grid" style="grid-template-columns:1fr 1fr;gap:22px">
       <div class="card">
         <h2>Volunteer / Intern</h2>
-        <p class="muted">Contribute time or skills—logistics, design, outreach, engineering. Remote and on‑ground roles.</p>
+        <p class="muted">Contribute time or skills—logistics, design, outreach, engineering. Remote and on-ground roles.</p>
         <form id="volForm" onsubmit="submitMessage(event, 'volunteers')" class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
           <input class="input" required name="name" placeholder="Full Name" />
           <input class="input" required name="phone" placeholder="Phone" />
@@ -301,17 +365,17 @@
       </div>
       <div class="card">
         <h2>Transparency</h2>
-        <p class="muted">Open, community‑driven and privacy‑respecting. This MVP stores data locally in your browser only. To accept public listings across users, connect a simple backend later (Firebase/Supabase).</p>
+        <p class="muted">Open, community-driven and privacy-respecting. This MVP stores data locally in your browser only. To accept public listings across users, connect a simple backend later (Firebase/Supabase).</p>
       </div>
     </div>
   </section>
 
   <!-- DONATION WIDGET (floating) -->
-  <div id="donateWidget" class="donate-widget" role="dialog" aria-modal="true">
+  <div id="donateWidget" class="donate-widget" role="dialog" aria-modal="true" aria-hidden="true">
     <h3 style="margin:0 0 8px">Donate via UPI</h3>
     <p class="note">Choose your UPI provider and generate a QR. Amount is optional.</p>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-      <select id="upiProvider" class="select">
+      <select id="upiProvider" class="select" aria-label="UPI Provider">
         <option value="@ybl">PhonePe (@ybl)</option>
         <option value="@axl">Google Pay (@axl)</option>
         <option value="@oksbi">Google Pay (@oksbi)</option>
@@ -329,7 +393,8 @@
     <div id="qrWrap" style="margin-top:12px;text-align:center"></div>
     <p class="note" style="margin-top:8px">If QR doesn't open in your app, send to UPI number <strong>9860191711</strong> manually.</p>
   </div>
-  <button class="btn cart-toggle" onclick="toggleCart()">🧺 Cart <span id="cartCount" class="badge">0</span></button>
+
+  <button class="btn cart-toggle" onclick="toggleCart()" aria-expanded="false" aria-controls="cartPanel">🧺 Cart <span id="cartCount" class="badge">0</span></button>
   <button class="btn owner-btn" onclick="openOwner()">🔐 Owner</button>
 
   <!-- CART PANEL -->
@@ -353,10 +418,10 @@
   </aside>
 
   <!-- OWNER / ADMIN DIALOG -->
-  <dialog id="ownerDialog">
+  <dialog id="ownerDialog" aria-labelledby="ownerTitle">
     <div class="dialog-inner">
       <form id="ownerLogin" onsubmit="ownerAuth(event)" class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
-        <h3 style="grid-column:1/-1;margin:0">Owner / Admin</h3>
+        <h3 id="ownerTitle" style="grid-column:1/-1;margin:0">Owner / Admin</h3>
         <input class="input" required name="pin" placeholder="Enter PIN (default: last 4 of phone)" />
         <button class="btn" style="grid-column:1/-1">Enter</button>
       </form>
@@ -369,15 +434,15 @@
         <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px">
           <div class="card">
             <h4 style="margin:0 0 6px">Items</h4>
-            <table class="table" id="ownerItems"></table>
+            <div class="table-wrap"><table class="table" id="ownerItems"></table></div>
           </div>
           <div class="card">
             <h4 style="margin:0 0 6px">Orders / Claims</h4>
-            <table class="table" id="ownerOrders"></table>
+            <div class="table-wrap"><table class="table" id="ownerOrders"></table></div>
           </div>
           <div class="card">
             <h4 style="margin:0 0 6px">Messages</h4>
-            <table class="table" id="ownerMsgs"></table>
+            <div class="table-wrap"><table class="table" id="ownerMsgs"></table></div>
           </div>
         </div>
         <div style="text-align:right;margin-top:10px">
@@ -390,15 +455,16 @@
   <footer>
     <div class="container">
       <div>© <span id="y"></span> GitteCharity (Nurtura). All Rights Reserved.</div>
-      <div style="margin-top:6px" class="note">Built with love • Single‑file open source • <a href="#about">About</a> • <a href="#get-involved">Get Involved</a> • <a href="#market">Free Items</a></div>
+      <div style="margin-top:6px" class="note">Built with love • Single-file open source • <a href="#about">About</a> • <a href="#get-involved">Get Involved</a> • <a href="#market">Free Items</a></div>
     </div>
   </footer>
 
   <script>
     /* ==========================================================
-     * GitteCharity — Single‑file static MVP for GitHub Pages
+     * GitteCharity — Single-file static MVP for GitHub Pages
      * Data persists locally in this browser using localStorage.
-     * Replace placeholders and push to your repo to go live.
+     * This script preserves all features and adds responsive UI
+     * enhancements: mobile menu toggle, responsive panels, etc.
      * ========================================================== */
 
     const LS_KEYS = {
@@ -412,6 +478,7 @@
     const $ = (sel, p=document) => p.querySelector(sel);
     const $$ = (sel, p=document) => [...p.querySelectorAll(sel)];
 
+    // state loaded from localStorage
     const state = {
       items: load(LS_KEYS.ITEMS, []),
       cart: load(LS_KEYS.CART, []),
@@ -420,6 +487,7 @@
       animals: load(LS_KEYS.ANIMALS, [])
     };
 
+    // initialise
     initSamples();
     renderItems();
     renderCart();
@@ -430,11 +498,39 @@
     function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
     function load(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback }catch(e){ return fallback } }
     function id(){ return Math.random().toString(36).slice(2,10) }
-    function toast(msg){ alert(msg) }
+    function toast(msg){ try{ if(window.navigator && navigator.vibrate) navigator.vibrate(20); }catch(e){} alert(msg) }
+
+    /* ---------- Mobile menu ---------- */
+    function toggleMenu(){
+      const nav = document.querySelector('.nav');
+      nav.classList.toggle('open');
+      const btn = document.querySelector('.menu-toggle');
+      const isOpen = nav.classList.contains('open');
+      btn.setAttribute('aria-expanded', isOpen?'true':'false');
+      // show/hide links container (for aria)
+      const links = document.getElementById('nav-links');
+      if(isOpen) links.style.display = 'flex';
+      else links.style.display = '';
+    }
+    // Close nav when clicking link on small screens
+    document.addEventListener('click', (e) => {
+      const btn = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav');
+      if(nav.classList.contains('open') && e.target.matches('#nav-links a')){
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        document.getElementById('nav-links').style.display = '';
+      }
+    });
 
     /* ---------- Filters ---------- */
-    function applyFilters(){ renderItems() }
-    function resetFilters(){ $('#search').value=''; $('#category').value=''; $('#city').value=''; renderItems() }
+    function applyFilters(){
+      renderItems();
+    }
+    function resetFilters(){
+      $('#search').value=''; $('#category').value=''; $('#city').value='';
+      renderItems();
+    }
 
     /* ---------- Items ---------- */
     function renderItems(){
@@ -443,21 +539,28 @@
       let items = [...state.items].sort((a,b)=>b.ts-a.ts);
       items = items.filter(i => (!q || (i.title+i.desc+i.city).toLowerCase().includes(q)) && (!cat || i.category===cat) && (!city || i.city.toLowerCase()===city.toLowerCase()));
       const wrap = $('#items'); wrap.innerHTML='';
-      if(items.length===0){ wrap.innerHTML = `<div class="card">No items yet. Be the first to <a href="#give">give something</a>!` }
+      if(items.length===0){
+        const noel = document.createElement('div');
+        noel.className = 'card';
+        noel.innerHTML = `No items yet. Be the first to <a href="#give">give something</a>!`;
+        wrap.appendChild(noel);
+        return;
+      }
       items.forEach(i=>{
         const el = document.createElement('div');
         el.className = 'card item';
+        el.style.alignItems = 'flex-start';
         el.innerHTML = `
-          <img src="${i.photo || placeholder(i.category)}" alt="${i.title}"/>
+          <img src="${i.photo || placeholder(i.category)}" alt="${escapeHtml(i.title)}"/>
           <div class="meta">
             <div style="display:flex;align-items:center;gap:8px;justify-content:space-between">
-              <div>
-                <strong>${i.title}</strong> <span class="badge">${i.category}</span>
-                <div class="muted">${i.city}${i.delivery? ' • Delivery available':''}</div>
+              <div style="min-width:0">
+                <strong>${escapeHtml(i.title)}</strong> <span class="badge">${escapeHtml(i.category)}</span>
+                <div class="muted" style="margin-top:4px">${escapeHtml(i.city)}${i.delivery? ' • Delivery available':''}</div>
               </div>
               <div class="price">FREE</div>
             </div>
-            <div class="muted" style="margin:6px 0 8px">${i.desc || ''}</div>
+            <div class="muted" style="margin:6px 0 8px">${escapeHtml(i.desc || '')}</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <button class="btn" onclick='addToCart("${i.id}")'>Add to Cart</button>
               <button class="btn secondary" onclick='shareItem("${i.id}")'>Share</button>
@@ -493,23 +596,28 @@
     }
 
     async function addItem(e){
-      e.preventDefault();
-      const fd = new FormData(e.target);
+      // handles both programmatic call or form submit
+      if(e && e.preventDefault) e.preventDefault();
+      let fd;
+      if(e && e.target && e.target instanceof HTMLFormElement) fd = new FormData(e.target);
+      else return toast('Invalid form submission');
+
       const photo = await readFileAsDataURL(fd.get('photo'));
       const item = {
         id:id(),
-        title: fd.get('title').trim(),
-        category: fd.get('category'),
-        city: fd.get('city').trim(),
-        contact: fd.get('contact').trim(),
-        desc: fd.get('desc').trim(),
+        title: (fd.get('title') || '').toString().trim(),
+        category: (fd.get('category') || '').toString(),
+        city: (fd.get('city') || '').toString().trim(),
+        contact: (fd.get('contact') || '').toString().trim(),
+        desc: (fd.get('desc') || '').toString().trim(),
         delivery: fd.get('delivery')==='on',
         animal: fd.get('animal')==='on',
         photo,
         ts: Date.now()
       }
       state.items.push(item); save(LS_KEYS.ITEMS, state.items);
-      e.target.reset(); renderItems(); toast('Item posted locally! (Visible on this device).')
+      if(e && e.target) e.target.reset();
+      renderItems(); toast('Item posted locally! (Visible on this device).')
     }
 
     function addToCart(itemId){
@@ -521,14 +629,14 @@
 
     function renderCart(){
       const out = state.cart.map(c=>{
-        return `<div class="cart-item"><img src="${c.photo || placeholder(c.category)}" alt="${c.title}"/><div style="flex:1"><div><strong>${c.title}</strong></div><div class="muted">${c.city} • ${c.category}</div></div><button class="btn ghost" onclick='removeFromCart("${c.id}")'>Remove</button></div>`
+        return `<div class="cart-item"><img src="${c.photo || placeholder(c.category)}" alt="${escapeHtml(c.title)}"/><div style="flex:1"><div><strong>${escapeHtml(c.title)}</strong></div><div class="muted">${escapeHtml(c.city)} • ${escapeHtml(c.category)}</div></div><button class="btn ghost" onclick='removeFromCart("${c.id}")'>Remove</button></div>`
       }).join('') || '<div class="muted">Cart is empty</div>';
       $('#cartItems').innerHTML = out;
       $('#cartCount').textContent = state.cart.length;
     }
 
     function removeFromCart(id0){ state.cart = state.cart.filter(x=>x.id!==id0); save(LS_KEYS.CART, state.cart); renderCart(); }
-    function toggleCart(force){ const p = $('#cartPanel'); p.classList.toggle('open', force ?? !p.classList.contains('open')); p.setAttribute('aria-hidden', !p.classList.contains('open')) }
+    function toggleCart(force){ const p = $('#cartPanel'); p.classList.toggle('open', force ?? !p.classList.contains('open')); const hidden = !p.classList.contains('open'); p.setAttribute('aria-hidden', hidden); document.querySelector('.cart-toggle').setAttribute('aria-expanded', (!hidden).toString()) }
 
     function checkout(e){
       e.preventDefault();
@@ -536,9 +644,9 @@
       const fd = new FormData(e.target);
       const order = {
         id: id(),
-        name: fd.get('name').trim(),
-        phone: fd.get('phone').trim(),
-        address: fd.get('address').trim(),
+        name: (fd.get('name')||'').toString().trim(),
+        phone: (fd.get('phone')||'').toString().trim(),
+        address: (fd.get('address')||'').toString().trim(),
         items: state.cart.map(({id,title,category,city})=>({id,title,category,city})),
         ts: Date.now(),
         status: 'Requested'
@@ -558,6 +666,7 @@
 
     function shareItem(id0){
       const it = state.items.find(x=>x.id===id0);
+      if(!it) return toast('Item not found');
       const url = location.href.split('#')[0];
       const text = `Free on GitteCharity: ${it.title} (${it.city})`;
       if(navigator.share){ navigator.share({title:'GitteCharity', text, url}); }
@@ -587,13 +696,18 @@
       const wrap = $('#animalList'); wrap.innerHTML='';
       state.animals.slice().reverse().forEach(a=>{
         const el = document.createElement('div'); el.className='card';
-        el.innerHTML = `<strong>${a.title}</strong> <span class="badge">${a.city}</span><div class="muted">${a.desc||''}</div><div class="note">${a.contact||''}</div>`;
+        el.innerHTML = `<strong>${escapeHtml(a.title)}</strong> <span class="badge">${escapeHtml(a.city)}</span><div class="muted">${escapeHtml(a.desc||'')}</div><div class="note">${escapeHtml(a.contact||'')}</div>`;
         wrap.appendChild(el);
       })
     }
 
     /* ---------- Donate / UPI QR ---------- */
-    function openDonate(open=true){ $('#donateWidget').classList.toggle('open', open) }
+    function openDonate(open=true){ 
+      const w = document.getElementById('donateWidget');
+      w.classList.toggle('open', open);
+      w.setAttribute('aria-hidden', (!open).toString());
+      if(open) w.scrollIntoView({behavior:'smooth', block:'center'});
+    }
     function makeUpiQR(){
       const suffix = $('#upiProvider').value;
       const amount = $('#upiAmount').value || '';
@@ -608,11 +722,19 @@
     }
 
     /* ---------- Owner / Admin ---------- */
-    function openOwner(){ $('#ownerDialog').showModal() }
+    function openOwner(){ 
+      const dialog = document.getElementById('ownerDialog');
+      try{
+        dialog.showModal();
+      }catch(e){
+        // fallback for older browsers
+        alert('Owner dialog not supported by your browser — please use a modern browser.');
+      }
+    }
     function ownerAuth(e){
       e.preventDefault();
       const pin = new FormData(e.target).get('pin').trim();
-      // Default PIN = last 4 digits of phone
+      // Default PIN = last 4 digits of phone used in this project: 1711
       const ok = pin === '1711';
       if(!ok){ toast('Wrong PIN'); return }
       $('#ownerLogin').style.display='none';
@@ -622,13 +744,13 @@
 
     function ownerRefresh(){
       // Items
-      const it = state.items.map(i=>`<tr><td>${i.title}</td><td>${i.city}</td><td>${i.category}</td><td><button class="btn ghost" onclick='delItem("${i.id}")'>Delete</button></td></tr>`).join('') || '<tr><td class="muted">No items</td></tr>';
+      const it = state.items.map(i=>`<tr><td>${escapeHtml(i.title)}</td><td>${escapeHtml(i.city)}</td><td>${escapeHtml(i.category)}</td><td><button class="btn ghost" onclick='delItem("${i.id}")'>Delete</button></td></tr>`).join('') || '<tr><td class="muted">No items</td></tr>';
       $('#ownerItems').innerHTML = `<tr><th>Title</th><th>City</th><th>Category</th><th></th></tr>${it}`;
       // Orders
-      const od = state.orders.map(o=>`<tr><td>${o.name}</td><td>${o.phone}</td><td>${o.items.length} items</td><td>${new Date(o.ts).toLocaleString()}</td></tr>`).join('') || '<tr><td class="muted">No orders</td></tr>';
+      const od = state.orders.map(o=>`<tr><td>${escapeHtml(o.name)}</td><td>${escapeHtml(o.phone)}</td><td>${o.items.length} items</td><td>${new Date(o.ts).toLocaleString()}</td></tr>`).join('') || '<tr><td class="muted">No orders</td></tr>';
       $('#ownerOrders').innerHTML = `<tr><th>Name</th><th>Phone</th><th>Count</th><th>Time</th></tr>${od}`;
       // Messages
-      const ms = state.messages.map(m=>`<tr><td>${m.bucket}</td><td>${m.name||''}</td><td>${m.phone||''}</td><td>${(m.msg||'').slice(0,40)}</td></tr>`).join('') || '<tr><td class="muted">No messages</td></tr>';
+      const ms = state.messages.map(m=>`<tr><td>${escapeHtml(m.bucket)}</td><td>${escapeHtml(m.name||'')}</td><td>${escapeHtml(m.phone||'')}</td><td>${escapeHtml((m.msg||'').slice(0,60))}</td></tr>`).join('') || '<tr><td class="muted">No messages</td></tr>';
       $('#ownerMsgs').innerHTML = `<tr><th>Type</th><th>Name</th><th>Phone</th><th>Message</th></tr>${ms}`;
     }
 
@@ -676,6 +798,24 @@
       state.items = samples.map(s=>({id:id(),photo:'',contact:'',animal:false,ts:Date.now()-Math.random()*9e7,...s}));
       save(LS_KEYS.ITEMS, state.items);
     }
+
+    /* ---------- helpers ---------- */
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str).replace(/[&<>"'`=\/]/g, function(s){ return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;' })[s]});
+    }
+
+    // close open panels when pressing Escape
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        const cart = document.getElementById('cartPanel');
+        if(cart.classList.contains('open')) toggleCart(false);
+        const donate = document.getElementById('donateWidget');
+        if(donate.classList.contains('open')) openDonate(false);
+        try{ document.getElementById('ownerDialog').close(); }catch(err){}
+      }
+    });
+
   </script>
 </body>
 </html>
