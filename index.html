@@ -182,15 +182,23 @@
       <!-- BRAND: inline SVG logo + title -->
       <div class="brand" style="gap:10px;align-items:center">
 
- <div class="logo-badge" aria-hidden="true" title="GitteCharity logo">
+<div class="logo-badge" aria-hidden="true" title="GitteCharity logo">
   <svg width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <!-- Single solid background -->
-    <rect width="64" height="64" rx="16" fill="#3B82F6" /> <!-- Blue-500 -->
+    <!-- Gradient background -->
+    <defs>
+      <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#6366F1"/> <!-- Indigo -->
+        <stop offset="100%" stop-color="#3B82F6"/> <!-- Blue -->
+      </linearGradient>
+    </defs>
+    <!-- Rounded square with gradient -->
+    <rect width="64" height="64" rx="16" fill="url(#logoGradient)" />
     <!-- White heart -->
     <path d="M32 48c-1-1-10-8-14-13-3-4-4-10-1-14 3-4 9-4 13 0l2 2 2-2c4-4 10-4 13 0 3 4 2 10-1 14-4 5-13 12-14 13z" 
           fill="white"/>
   </svg>
 </div>
+
 
         <div class="brand-title">
           <strong>GitteCharity</strong>
